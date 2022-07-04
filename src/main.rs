@@ -8,7 +8,7 @@ fn main() {
     let b = Arc::new(Mutex::new(20));
     let c = Arc::new(Mutex::new(30));
 
-    for _ in 0..1_000_000 {
+    for i in 0..1_000_000 {
         let aa = Arc::clone(&a);
         let bb = Arc::clone(&b);
         let cc = Arc::clone(&c);
@@ -31,8 +31,8 @@ fn main() {
             }
         });
 
-        assert_eq!(*a.lock().unwrap(), 10);
-        assert_eq!(*b.lock().unwrap(), 20);
-        assert_eq!(*c.lock().unwrap(), 30);
+        assert_eq!(*a.lock().unwrap(), 10, "{i}");
+        assert_eq!(*b.lock().unwrap(), 20, "{i}");
+        assert_eq!(*c.lock().unwrap(), 30, "{i}");
     }
 }
