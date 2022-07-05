@@ -9,30 +9,30 @@ lazy_static! {
 }
 
 fn main() {
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
-    // thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
     thread::spawn(simple_ops);
     thread::spawn(simple_ops);
     thread::spawn(simple_ops);
@@ -55,7 +55,7 @@ fn simple_ops() {
         }
         {
             let mut v = A.lock().unwrap();
-            if *v <= 0 {
+            if *v < 0 {
                 *v += 1
             }
         }
