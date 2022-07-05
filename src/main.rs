@@ -49,12 +49,12 @@ fn simple_ops() {
     for _ in 0..10_000_000_000_isize {
         {
             if A.load(Ordering::SeqCst) >= 0 {
-                A.fetch_sub(1, Ordering::Relaxed);
+                A.fetch_sub(1, Ordering::SeqCst);
             }
         }
         {
             if A.load(Ordering::SeqCst) < 0 {
-                A.fetch_add(1, Ordering::Relaxed);
+                A.fetch_add(1, Ordering::SeqCst);
             }
         }
     }
