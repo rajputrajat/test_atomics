@@ -47,12 +47,11 @@ fn main() {
 
 fn simple_ops() {
     for _ in 0..1_000_000_000 {
+        if *A.lock().unwrap() >= 0 {
+            *A.lock().unwrap() -= 1
+        }
         if *A.lock().unwrap() <= 0 {
             *A.lock().unwrap() += 1;
-        }
-
-        if *A.lock().unwrap() > 0 {
-            *A.lock().unwrap() -= 1
         }
     }
 }
