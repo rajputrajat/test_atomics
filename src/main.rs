@@ -9,49 +9,55 @@ lazy_static! {
 }
 
 fn main() {
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
-    thread::spawn(|| simple_ops());
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
+    thread::spawn(simple_ops);
 
     println!("value of A: {}", *A.lock().unwrap());
 }
 
 fn simple_ops() {
     for _ in 0..1_000_000_000 {
-        if *A.lock().unwrap() >= 0 {
-            *A.lock().unwrap() -= 1
+        {
+            let mut v = A.lock().unwrap();
+            if *v >= 0 {
+                *v -= 1
+            }
         }
-        if *A.lock().unwrap() <= 0 {
-            *A.lock().unwrap() += 1;
+        {
+            let mut v = A.lock().unwrap();
+            if *v <= 0 {
+                *v += 1
+            }
         }
     }
 }
