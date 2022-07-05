@@ -1,38 +1,60 @@
+use lazy_static::lazy_static;
 use std::{
     sync::{Arc, Mutex},
     thread,
 };
 
+lazy_static! {
+    static ref A: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
+    static ref B: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
+    static ref C: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
+}
+
 fn main() {
-    let a = Arc::new(Mutex::new(10));
-    let b = Arc::new(Mutex::new(20));
-    let c = Arc::new(Mutex::new(30));
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
+    thread::spawn(|| simple_ops());
 
-    for i in 0..1_000_000 {
-        let aa = Arc::clone(&a);
-        let bb = Arc::clone(&b);
-        let cc = Arc::clone(&c);
+    println!("value of A: {}", *A.lock().unwrap());
+}
 
-        thread::spawn(move || {
-            *aa.lock().unwrap() = 30;
-            if *bb.lock().unwrap() == 30 {
-                *cc.lock().unwrap() = 20;
-            }
-        });
+fn simple_ops() {
+    for _ in 0..1_000_000_000 {
+        if *A.lock().unwrap() <= 0 {
+            *A.lock().unwrap() += 1;
+        }
 
-        let aa = Arc::clone(&a);
-        let bb = Arc::clone(&b);
-        let cc = Arc::clone(&c);
-
-        thread::spawn(move || {
-            *bb.lock().unwrap() = 30;
-            if *aa.lock().unwrap() == 10 {
-                *cc.lock().unwrap() = 20;
-            }
-        });
-
-        assert_eq!(*a.lock().unwrap(), 10, "{i}");
-        assert_eq!(*b.lock().unwrap(), 20, "{i}");
-        assert_eq!(*c.lock().unwrap(), 30, "{i}");
+        if *A.lock().unwrap() > 0 {
+            *A.lock().unwrap() -= 1
+        }
     }
 }
