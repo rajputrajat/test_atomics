@@ -1,11 +1,11 @@
 use lazy_static::lazy_static;
 use std::{
-    sync::{Arc, Mutex},
+    sync::atomic::{AtomicIsize, Ordering},
     thread,
 };
 
 lazy_static! {
-    static ref A: Arc<Mutex<isize>> = Arc::new(Mutex::new(0));
+    static ref A: AtomicIsize = AtomicIsize::new(0);
 }
 
 fn main() {
@@ -42,21 +42,19 @@ fn main() {
     thread::spawn(simple_ops);
     thread::spawn(simple_ops);
 
-    println!("value of A: {}", *A.lock().unwrap());
+    println!("value of A: {}", A.load(Ordering::Relaxed));
 }
 
 fn simple_ops() {
     for _ in 0..10_000_000_000_isize {
         {
-            let mut v = A.lock().unwrap();
-            if *v >= 0 {
-                *v -= 1
+            if A.load(Ordering::Relaxed) >= 0 {
+                A.fetch_sub(1, Ordering::Relaxed);
             }
         }
         {
-            let mut v = A.lock().unwrap();
-            if *v < 0 {
-                *v += 1
+            if A.load(Ordering::Relaxed) < 0 {
+                A.fetch_add(1, Ordering::Relaxed);
             }
         }
     }
