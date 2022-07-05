@@ -67,6 +67,15 @@ fn simple_ops() {
         }
         {
             loop {
+                if A.compare_exchange(0, -1, Ordering::Relaxed, Ordering::Relaxed)
+                    .is_ok()
+                {
+                    break;
+                }
+            }
+        }
+        {
+            loop {
                 if A.compare_exchange(-1, 0, Ordering::Relaxed, Ordering::Relaxed)
                     .is_ok()
                 {
