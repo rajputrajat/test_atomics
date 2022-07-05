@@ -6,8 +6,6 @@ use std::{
 
 lazy_static! {
     static ref A: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
-    static ref B: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
-    static ref C: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
 }
 
 fn main() {
